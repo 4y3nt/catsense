@@ -1,39 +1,6 @@
 setfpscap(120)
 
 
-local validKeys = {
-    "", -- Add valid keys here
-    "",
-    "BETATESTERUSER1963"
-}
-
--- RemoteEvent to handle key validation
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local keyEvent = Instance.new("RemoteEvent")
-keyEvent.Name = "KeyValidationEvent"
-keyEvent.Parent = ReplicatedStorage
-
--- Function to validate keys
-local function isValidKey(key)
-    for _, validKey in ipairs(validKeys) do
-        if key == validKey then
-            return true
-        end
-    end
-    return false
-end
-
-keyEvent.OnServerEvent:Connect(function(player, key)
-    if isValidKey(key) then
-        print(player.Name .. " entered a valid key!")
-        
-        player:LoadCharacter()
-        keyEvent:FireClient(player, true) -- Notify the client the key is valid
-    else
-        print(player.Name .. " entered an invalid key!")
-
-        keyEvent:FireClient(player, false) -- Notify the client the key is invalid
-
 local Settings = {
     Accent = Color3.fromHex("#4799ad"),
     Font = Enum.Font.SourceSans,
